@@ -19,3 +19,7 @@
 .byebug_history
 /public/packs
 /node_modules
+
+/spec/examples.txt
+/coverage
+.DS_Store
