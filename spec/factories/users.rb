@@ -5,5 +5,9 @@ FactoryGirl.define do
 
     password 's3cr3t'
     password_confirmation 's3cr3t'
+
+    trait :admin do
+      admin true
+    end
   end
 end

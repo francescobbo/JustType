@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :admin do
+    root to: 'admin#dashboard'
+
+    get :signin, to: 'sessions#new'
+    post :signin, to: 'sessions#create'
+    delete :signout, to: 'sessions#destroy'
+  end
+
+  root to: 'pages#index'
 end

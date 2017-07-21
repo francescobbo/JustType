@@ -7,6 +7,9 @@ SimpleCov.start 'rails' do
 end
 
 RSpec.configure do |config|
+  config.alias_example_group_to :feature, capybara_feature: true, type: :feature
+  config.alias_example_to :scenario
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
