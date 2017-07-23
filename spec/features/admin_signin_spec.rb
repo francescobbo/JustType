@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.feature "Admin Sign In" do
+RSpec.feature 'Admin Sign In' do
   let(:admin) { FactoryGirl.create(:user, :admin) }
 
   scenario 'Successful sign in' do
     visit admin_signin_path
 
-    within("form") do
+    within('form') do
       fill_in 'email', with: admin.email
       fill_in 'password', with: admin.password
       click_button 'Sign in'
@@ -18,7 +18,7 @@ RSpec.feature "Admin Sign In" do
   scenario 'Failed sign in' do
     visit admin_signin_path
 
-    within("form") do
+    within('form') do
       fill_in 'email', with: 'random'
       fill_in 'password', with: 'h4xxor'
       click_button 'Sign in'

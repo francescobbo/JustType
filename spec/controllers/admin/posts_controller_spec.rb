@@ -28,7 +28,7 @@ describe Admin::PostsController do
 
       context 'when the parameters are not valid' do
         it 'does not create a new post' do
-          expect { post :create, params: { post: { title: '' } } }.to_not change { Post.count }
+          expect { post :create, params: { post: { title: '' } } }.to_not(change { Post.count })
         end
       end
     end

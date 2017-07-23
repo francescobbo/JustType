@@ -1,0 +1,31 @@
+AllCops:
+  TargetRubyVersion: 2.4
+
+  Exclude:
+    - bin/**/*
+    - db/schema.rb
+    - db/migrate/**/*
+    - config/locales/**/*
+    - config/environments/*
+    - vendor/**/*
+    - Gemfile
+    - node_modules/**/*
+
+
+Rails:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Metrics/BlockLength:
+  Enabled: false

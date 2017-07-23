@@ -1,19 +1,19 @@
 module Admin
   class SessionsController < AdminController
     skip_before_action :ensure_signin, :ensure_admin, except: :destroy
-    before_action :ensure_anonymous, only: [:new, :create]
+    before_action :ensure_anonymous, only: %i[new create]
 
     def new
     end
 
     def create
-      @user = User.find_by(email: params[:email])
+      @user = User.admin.authenticate(params[:email], params[:password])
 
-      if @user&.authenticate(params[:password]) && @user.admin?
+      if @user
         session[:user_id] = @user.id
-        redirect_to params[:continue] ? params[:continue] : admin_root_path
+        redirect_to after_signin_path
       else
-        flash.now[:error] = "Invalid email or password"
+        flash.now[:error] = 'Invalid email or password'
         render :new
       end
     end
@@ -31,6 +31,10 @@ module Admin
       elsif current_user
         redirect_to root_path
       end
+    end
+
+    def after_signin_path
+      params[:continue] ? params[:continue] : admin_root_path
     end
   end
 end
