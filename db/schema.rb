@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170715092558) do
   enable_extension "pgcrypto"
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id", null: false
+    t.uuid "author_id", null: false
     t.text "title", null: false
     t.text "slug", null: false
     t.text "original_content"
@@ -36,5 +36,5 @@ ActiveRecord::Schema.define(version: 20170715092558) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "posts", "users", on_delete: :restrict
+  add_foreign_key "posts", "users", column: "author_id", on_delete: :restrict
 end
