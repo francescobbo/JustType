@@ -15,6 +15,7 @@ gem 'jbuilder'
 gem 'slim-rails'
 
 gem 'bcrypt'
+gem 'friendly_id'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
