@@ -1,4 +1,5 @@
 = form_with model: [:admin, post] do |f|
   = f.text_field :title, placeholder: 'Title'
   = f.text_area :original_content
-  = f.submit
+  = f.button 'Save Draft', name: 'submit_type', value: 'draft'
+  = f.button 'Publish', name: 'submit_type', value: 'publish'

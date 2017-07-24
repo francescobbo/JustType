@@ -31,6 +31,27 @@ describe Admin::PostsController do
           expect { post :create, params: { post: { title: '' } } }.to_not(change { Post.count })
         end
       end
+
+      context 'when the action is publish' do
+        it 'sets published on the new post' do
+          post :create, params: valid_params.merge(submit_type: 'publish')
+          expect(Post.last.published).to be_truthy
+        end
+      end
+
+      context 'when the params specify a published_at timestamp' do
+        it 'sets published on the new post' do
+          post :create, params: valid_params.deep_merge(post: { published_at: Date.yesterday })
+          expect(Post.last.published).to be_truthy
+        end
+      end
+
+      context 'when the action is draft' do
+        it 'does not set published on the new post' do
+          post :create, params: valid_params.merge(submit_type: 'draft')
+          expect(Post.last.published).to be_falsey
+        end
+      end
     end
   end
 end

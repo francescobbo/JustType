@@ -7,9 +7,17 @@ class Post < ApplicationRecord
 
   validates :author, :title, :rendered_content, presence: true
 
+  scope :visible, -> { where(published: true).where("published_at < ?", Time.now) }
+
   def original_content=(markdown)
     self[:original_content] = markdown
     self[:rendered_content] = markdown
+  end
+
+  def publish
+    self.published = true
+    self.published_at ||= Time.now
+    nil
   end
 
   def slug_generators

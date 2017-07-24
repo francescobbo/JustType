@@ -25,4 +25,24 @@ RSpec.describe Post, type: :model do
       end
     end
   end
+
+  describe '#publish' do
+    context 'when the published_at timestamp is nil' do
+      it 'sets the published_at timestamp' do
+        post = FactoryGirl.build(:post, published_at: nil)
+        post.publish
+
+        expect(post.published_at).to be_within(1.second).of Time.now
+      end
+    end
+
+    context 'when the published_at timestamp is set' do
+      it 'does not replace it' do
+        post = FactoryGirl.build(:post, published_at: Date.yesterday)
+        post.publish
+
+        expect(post.published_at).to eq Date.yesterday
+      end
+    end
+  end
 end

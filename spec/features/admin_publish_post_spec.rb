@@ -10,9 +10,22 @@ RSpec.feature 'Publishing' do
     within('form') do
       fill_in 'post[title]', with: 'A great article'
       fill_in 'post[original_content]', with: 'Oh my gosh!'
-      click_button 'Create Post'
+      click_button 'Publish'
     end
 
-    expect(page).to have_content 'Dashboard'
+    expect(Post.visible.count).to eq 1
+  end
+
+  scenario 'Admin saves a draft' do
+    visit new_admin_post_path
+
+    within('form') do
+      fill_in 'post[title]', with: 'A great article'
+      fill_in 'post[original_content]', with: 'Oh my gosh!'
+      click_button 'Save Draft'
+    end
+
+    expect(Post.visible.count).to eq 0
+    expect(Post.count).to eq 1
   end
 end

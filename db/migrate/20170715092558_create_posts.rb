@@ -8,6 +8,8 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.text :slug, null: false
       t.text :original_content
       t.text :rendered_content, null: false
+      t.boolean :published, null: false, default: false
+      t.datetime :published_at
 
       t.timestamps
     end
