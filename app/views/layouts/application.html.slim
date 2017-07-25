@@ -12,5 +12,10 @@ html lang=Settings.language
 
     = auto_discovery_link_tag :rss, feed_url, title: "#{Settings.site_name}"
 
+    script type='application/ld+json'
+      == website_jsonld
+    script type='application/ld+json'
+      == organization_jsonld
+
   body
     = yield
