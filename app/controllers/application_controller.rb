@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
       site: Settings.site_name,
       reverse: true,
       viewport: 'width=device-width,minimum-scale=1,initial-scale=1',
+      'theme-color': Settings.theme_color,
       og: {
         type: 'website',
         url: request.original_url,
