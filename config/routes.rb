@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   end
 
   root to: 'pages#index'
+
+  get '/*slug', to: 'posts#show', as: :post
 end
