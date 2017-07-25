@@ -11,5 +11,10 @@ Rails.application.routes.draw do
 
   root to: 'pages#index'
 
+  get '/manifest.json', to: 'meta#manifest', as: :application_manifest, defaults: { format: :json }
+  get '/robots.txt', to: 'meta#robots', as: :robots, defaults: { format: :txt }
+  get '/sitemaps/index.xml', to: 'meta#sitemap_index', as: :sitemap_index, format: :xml
+  get '/sitemaps/:type.xml', to: 'meta#sitemap', as: :sitemap, defaults: { format: :xml }
+
   get '/*slug', to: 'posts#show', as: :post
 end
