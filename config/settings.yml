@@ -6,3 +6,5 @@ locale: en_GB
 text_direction: ltr
 
 banned_robots: []
+
+embed_css: true

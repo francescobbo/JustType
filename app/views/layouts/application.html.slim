@@ -5,7 +5,10 @@ html lang=Settings.language
     = display_meta_tags(default_meta_tags)
     = csrf_meta_tags
 
-    = stylesheet_link_tag 'application', media: 'all'
+    - if Settings.embed_css
+      style == read_css_asset('application')
+    - else
+      = stylesheet_link_tag 'application', media: 'all'
 
     = auto_discovery_link_tag :rss, feed_url, title: "#{Settings.site_name}"
 
