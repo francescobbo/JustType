@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get '/manifest.json', to: 'meta#manifest', as: :application_manifest, defaults: { format: :json }
   get '/robots.txt', to: 'meta#robots', as: :robots, defaults: { format: :txt }
+  get '/feed.rss', to: 'meta#feed', as: :feed, defaults: { format: :rss }
   get '/sitemaps/index.xml', to: 'meta#sitemap_index', as: :sitemap_index, format: :xml
   get '/sitemaps/:type.xml', to: 'meta#sitemap', as: :sitemap, defaults: { format: :xml }
 

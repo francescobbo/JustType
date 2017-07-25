@@ -6,6 +6,12 @@ class MetaController < ApplicationController
   def manifest
   end
 
+  def feed
+    render locals: {
+      posts: Post.visible.all
+    }
+  end
+
   def sitemap_index
   end
 

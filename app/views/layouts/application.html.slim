@@ -6,5 +6,7 @@ html lang=Settings.language
 
     = stylesheet_link_tag 'application', media: 'all'
 
+    = auto_discovery_link_tag :rss, feed_url, title: "#{Settings.site_name}"
+
   body
     = yield
