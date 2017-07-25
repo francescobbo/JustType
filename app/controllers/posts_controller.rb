@@ -2,7 +2,9 @@ class PostsController < ApplicationController
   def show
     post = Post.visible.friendly.find(params[:slug])
 
+    # Missing: description
     set_meta_tags({
+      canonical: post_url(post),
       title: post.title,
       og: {
         type: 'article',
