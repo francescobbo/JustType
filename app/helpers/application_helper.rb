@@ -6,7 +6,7 @@ module ApplicationHelper
       content = File.read "#{Rails.root}/public#{stylesheet_path(name, host: nil)}"
     end
 
-    content.gsub(/\n\s*/, '')
+    content.gsub(/\n\s*/, '').gsub(/\/\*[^*]*\*+([^\/*][^*]*\*+)*\//, '')
   end
 
   def website_jsonld
