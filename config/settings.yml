@@ -2,6 +2,7 @@ site_name: JustType
 short_site_name: JustType
 theme_color: '#3c3f45'
 language: en
+locale: en_GB
 text_direction: ltr
 
 banned_robots: []
