@@ -28,7 +28,8 @@ module Admin
 
     def default_meta_tags
       {
-        site: 'JustType Admin'
+        site: 'JustType Admin',
+        viewport: 'width=device-width,minimum-scale=1,initial-scale=1'
       }
     end
   end
