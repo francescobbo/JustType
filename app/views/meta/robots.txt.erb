@@ -2,4 +2,11 @@ User-Agent: *
 Allow: /
 Disallow: /admin
 
+<% if Settings.banned_robots.any? %>
+  <% Settings.banned_robots.each do |name| %>
+User-Agent: <%= name %>
+  <% end %>
+Disallow: /
+<% end %>
+
 Sitemap: <%= sitemap_index_url %>

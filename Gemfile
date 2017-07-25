@@ -14,6 +14,7 @@ gem 'webpacker'
 gem 'jbuilder'
 gem 'slim-rails'
 
+gem 'config'
 gem 'bcrypt'
 gem 'friendly_id'
 gem 'meta-tags'
