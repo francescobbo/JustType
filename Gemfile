@@ -19,6 +19,7 @@ gem 'bcrypt'
 gem 'friendly_id'
 gem 'meta-tags'
 gem 'serviceworker-rails'
+gem 'awesome_nested_set'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
