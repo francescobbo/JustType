@@ -1,5 +1,6 @@
 site_name: JustType
 short_site_name: JustType
+base_url: 'localhost:3000'
 theme_color: '#3c3f45'
 language: en
 locale: en_GB
