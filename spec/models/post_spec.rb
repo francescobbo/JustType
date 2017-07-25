@@ -32,7 +32,7 @@ RSpec.describe Post, type: :model do
         post = FactoryGirl.build(:post, published_at: nil)
         post.publish
 
-        expect(post.published_at).to be_within(1.second).of Time.now
+        expect(post.published_at).to be_within(1.second).of Time.now.utc
       end
     end
 
