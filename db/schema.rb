@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725205604) do
+ActiveRecord::Schema.define(version: 20170801092558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170725205604) do
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "author_id", null: false
+    t.uuid "category_id"
     t.text "title", null: false
     t.text "slug", null: false
     t.text "original_content"
@@ -64,5 +65,6 @@ ActiveRecord::Schema.define(version: 20170725205604) do
   end
 
   add_foreign_key "categories", "categories", column: "parent_id", on_delete: :nullify
+  add_foreign_key "posts", "categories", on_delete: :nullify
   add_foreign_key "posts", "users", column: "author_id", on_delete: :restrict
 end

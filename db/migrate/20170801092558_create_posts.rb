@@ -3,6 +3,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
     create_table :posts, id: false do |t|
       uuid_primary_key(t)
       uuid_reference(t, :author_id, null: false)
+      uuid_reference(t, :category_id)
 
       t.text :title, null: false
       t.text :slug, null: false
@@ -15,5 +16,6 @@ class CreatePosts < ActiveRecord::Migration[5.1]
     end
 
     add_foreign_key :posts, :users, on_delete: :restrict, column: :author_id
+    add_foreign_key :posts, :categories, on_delete: :nullify
   end
 end

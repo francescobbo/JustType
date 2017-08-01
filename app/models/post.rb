@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   friendly_id :slug_generators, use: :history
 
   belongs_to :author, class_name: 'User'
+  belongs_to :category, optional: true
 
   validates :author, :title, :rendered_content, presence: true
 
