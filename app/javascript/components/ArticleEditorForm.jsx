@@ -9,7 +9,7 @@ class ArticleEditorForm extends React.Component {
     return (
       <div>
         <input value={this.props.article.title} type="text" placeholder="Title" onChange={this.props.updateTitle} />
-        <SimpleMDE value={this.props.article.content} onChange={this.props.updateContent} />
+        <SimpleMDE value={this.props.article.original_content} onChange={this.props.updateContent} />
         <button onClick={this.props.onSaveDraft}>Save Draft</button>
         <button onClick={this.props.onPublish}>Publish</button>
       </div>

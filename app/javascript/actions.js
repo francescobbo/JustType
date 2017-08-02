@@ -1,54 +1,43 @@
+import Article from './api/Article'
+
+export const fetchArticle = (id) => {
+  return dispatch => {
+    return Article.fetch(id).then(json => dispatch(receiveArticle(json)))
+  }
+}
+
 export const saveDraft = () => {
   return (dispatch, getState) => {
     let state = getState()
-    let requestBody = {
-      title: state.article.title,
-      original_content: state.article.content
-    }
 
-    let endpoint = state.article.id ? `/admin/articles/${state.article.id}.json` : '/admin/articles.json'
-    let method = state.article.id ? 'PATCH' : 'POST'
+    let request
+    if (state.article.id)
+      request = Article.update(state.article.id, state.article, 'draft')
+    else
+      request = Article.create(state.article, 'draft')
 
-    return fetch(endpoint, {
-      method: method,
-      credentials: 'same-origin',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        article: requestBody,
-        submit_type: 'draft'
-      })
-    })
-    .then(response => response.json())
-    .then(json => dispatch(receiveArticle(json)))
+    return request.then(json => dispatch(receiveArticle(json)))
   }
 }
 
 export const publish = () => {
   return (dispatch, getState) => {
     let state = getState()
-    let requestBody = {
-      title: state.article.title,
-      original_content: state.article.content
-    }
 
-    let endpoint = state.article.id ? `/admin/articles/${state.article.id}.json` : '/admin/articles.json'
-    let method = state.article.id ? 'PATCH' : 'POST'
+    let request
+    if (state.article.id)
+      request = Article.update(state.article.id, state.article, 'publish')
+    else
+      request = Article.create(state.article, 'publish')
 
-    return fetch(endpoint, {
-      method: method,
-      credentials: 'same-origin',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        article: requestBody,
-        submit_type: 'publish'
-      })
-    })
-    .then(response => response.json())
-    .then(json => dispatch(receiveArticle(json)))
+    return request.then(json => dispatch(receiveArticle(json)))
+  }
+}
+
+function receiveArticle(json) {
+  return {
+    type: 'RECEIVE_ARTICLE',
+    payload: json
   }
 }
 
@@ -67,21 +56,5 @@ export const setContent = (content) => {
     payload: {
       content: content
     }
-  }
-}
-
-function receiveArticle(json) {
-  console.log("RECEIVING");
-  return {
-    type: 'RECEIVE_ARTICLE',
-    payload: json
-  }
-}
-
-export const fetchArticle = (id) => {
-  return dispatch => {
-    return fetch(`/admin/articles/${id}.json`, { credentials: 'same-origin' })
-      .then(response => response.json())
-      .then(json => dispatch(receiveArticle(json)))
   }
 }
