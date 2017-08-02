@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 
-import ArticleEditorForm from './ArticleEditorForm';
+import ArticleEditorForm from './ArticleEditorForm'
 
 import { fetchArticle } from '../actions'
 
