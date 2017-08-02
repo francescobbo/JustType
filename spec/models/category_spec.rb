@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
   it { is_expected.to validate_presence_of :name }
-  it { is_expected.to have_many :posts }
+  it { is_expected.to have_many :articles }
 
   it 'has tree relationships' do
     c1 = FactoryGirl.create(:category)

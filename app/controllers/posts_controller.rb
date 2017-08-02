@@ -1,25 +1,25 @@
-class PostsController < ApplicationController
+class ArticlesController < ApplicationController
   def show
-    post = Post.visible.friendly.find(params[:slug])
+    article = Article.visible.friendly.find(params[:slug])
 
     # Missing: description
     set_meta_tags({
-      canonical: post_url(post),
-      title: post.title,
+      canonical: article_url(article),
+      title: article.title,
       og: {
         type: 'article',
-        updated_time: post.updated_at.iso8601
+        updated_time: article.updated_at.iso8601
       },
       article: {
         section: "Uncategorized",
-        published_time: post.published_at.iso8601,
-        modified_time: post.updated_at.iso8601
+        published_time: article.published_at.iso8601,
+        modified_time: article.updated_at.iso8601
       },
-      "DC.date.issued" => post.published_at.iso8601
+      "DC.date.issued" => article.published_at.iso8601
     })
 
     render locals: {
-      post: post
+      article: article
     }
   end
 end

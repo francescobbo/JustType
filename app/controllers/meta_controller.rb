@@ -8,7 +8,7 @@ class MetaController < ApplicationController
 
   def feed
     render locals: {
-      posts: Post.visible.all
+      articles: Article.visible.all
     }
   end
 
@@ -19,8 +19,8 @@ class MetaController < ApplicationController
     case params[:type]
     when 'pages'
       urls = [root_url]
-    when 'posts'
-      urls = Post.visible.map { |post| post_url(post) }
+    when 'articles'
+      urls = Article.visible.map { |article| article_url(article) }
     end
 
     render locals: {

@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SimpleMDE from 'react-simplemde-editor';
 
-import PostEditor from '../components/PostEditor';
+import ArticleEditor from '../components/ArticleEditor';
 
-let postEditor = document.querySelectorAll('.react-entry[data-react="PostEditor"]')[0]
-if (postEditor)
-  ReactDOM.render(<PostEditor />, postEditor);
+let articleEditor = document.querySelectorAll('.react-entry[data-react="ArticleEditor"]')[0]
+if (articleEditor)
+  ReactDOM.render(<ArticleEditor />, articleEditor);

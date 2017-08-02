@@ -5,6 +5,6 @@ xml.tag! 'sitemapindex', 'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9
   end
 
   xml.sitemap do
-    xml.loc sitemap_url('posts')
+    xml.loc sitemap_url('articles')
   end
 end

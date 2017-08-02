@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class PostEditor extends React.Component {
+export default class ArticleEditor extends React.Component {
   render() {
     return (
       <form>

@@ -1,6 +1,6 @@
-class CreatePosts < ActiveRecord::Migration[5.1]
+class CreateArticles < ActiveRecord::Migration[5.1]
   def change
-    create_table :posts, id: false do |t|
+    create_table :articles, id: false do |t|
       uuid_primary_key(t)
       uuid_reference(t, :author_id, null: false)
       uuid_reference(t, :category_id)
@@ -15,7 +15,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_foreign_key :posts, :users, on_delete: :restrict, column: :author_id
-    add_foreign_key :posts, :categories, on_delete: :nullify
+    add_foreign_key :articles, :users, on_delete: :restrict, column: :author_id
+    add_foreign_key :articles, :categories, on_delete: :nullify
   end
 end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     post :signin, to: 'sessions#create'
     delete :signout, to: 'sessions#destroy'
 
-    resources :posts
+    resources :articles
   end
 
   root to: 'pages#index'
@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   get '/sitemaps/index.xml', to: 'meta#sitemap_index', as: :sitemap_index, format: :xml
   get '/sitemaps/:type.xml', to: 'meta#sitemap', as: :sitemap, defaults: { format: :xml }
 
-  get '/*slug', to: 'posts#show', as: :post
+  get '/*slug', to: 'articles#show', as: :article
 end

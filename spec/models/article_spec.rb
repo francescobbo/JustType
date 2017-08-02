@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Post, type: :model do
+RSpec.describe Article, type: :model do
   it 'has a valid factory' do
-    expect(FactoryGirl.build(:post)).to be_valid
+    expect(FactoryGirl.build(:article)).to be_valid
   end
 
   it { is_expected.to belong_to :author }
@@ -14,15 +14,15 @@ RSpec.describe Post, type: :model do
   context 'on creation' do
     context 'when a slug is specified' do
       it 'maintains the given slug' do
-        post = FactoryGirl.create(:post, slug: 'i-am-a-slug')
-        expect(post.slug).to eq 'i-am-a-slug'
+        article = FactoryGirl.create(:article, slug: 'i-am-a-slug')
+        expect(article.slug).to eq 'i-am-a-slug'
       end
     end
 
     context 'when the slug is left empty' do
       it 'generates a slug' do
-        post = FactoryGirl.create(:post, title: 'I am a title')
-        expect(post.slug).to eq 'i-am-a-title'
+        article = FactoryGirl.create(:article, title: 'I am a title')
+        expect(article.slug).to eq 'i-am-a-title'
       end
     end
   end
@@ -30,19 +30,19 @@ RSpec.describe Post, type: :model do
   describe '#publish' do
     context 'when the published_at timestamp is nil' do
       it 'sets the published_at timestamp' do
-        post = FactoryGirl.build(:post, published_at: nil)
-        post.publish
+        article = FactoryGirl.build(:article, published_at: nil)
+        article.publish
 
-        expect(post.published_at).to be_within(1.second).of Time.now.utc
+        expect(article.published_at).to be_within(1.second).of Time.now.utc
       end
     end
 
     context 'when the published_at timestamp is set' do
       it 'does not replace it' do
-        post = FactoryGirl.build(:post, published_at: Date.yesterday)
-        post.publish
+        article = FactoryGirl.build(:article, published_at: Date.yesterday)
+        article.publish
 
-        expect(post.published_at).to eq Date.yesterday
+        expect(article.published_at).to eq Date.yesterday
       end
     end
   end

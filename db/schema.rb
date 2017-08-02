@@ -16,6 +16,19 @@ ActiveRecord::Schema.define(version: 20170801092558) do
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
 
+  create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "author_id", null: false
+    t.uuid "category_id"
+    t.text "title", null: false
+    t.text "slug", null: false
+    t.text "original_content"
+    t.text "rendered_content", null: false
+    t.boolean "published", default: false, null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -41,19 +54,6 @@ ActiveRecord::Schema.define(version: 20170801092558) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-  create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "author_id", null: false
-    t.uuid "category_id"
-    t.text "title", null: false
-    t.text "slug", null: false
-    t.text "original_content"
-    t.text "rendered_content", null: false
-    t.boolean "published", default: false, null: false
-    t.datetime "published_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20170801092558) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "articles", "categories", on_delete: :nullify
+  add_foreign_key "articles", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "categories", "categories", column: "parent_id", on_delete: :nullify
-  add_foreign_key "posts", "categories", on_delete: :nullify
-  add_foreign_key "posts", "users", column: "author_id", on_delete: :restrict
 end

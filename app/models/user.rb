@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   scope :admin, -> { where(admin: true) }
 
-  has_many :posts, foreign_key: :author_id
+  has_many :articles, foreign_key: :author_id
 
   validates :name, :email, presence: true
   validates :email, uniqueness: true

@@ -1,4 +1,4 @@
-class Post < ApplicationRecord
+class Article < ApplicationRecord
   include FriendlyId
 
   friendly_id :slug_generators, use: :history
