@@ -27,6 +27,7 @@
     "rails-erb-loader": "^5.0.2",
     "react": "next",
     "react-dom": "next",
+    "react-simplemde-editor": "^3.6.11",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",

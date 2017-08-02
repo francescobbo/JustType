@@ -1,18 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SimpleMDE from 'react-simplemde-editor';
 
-class PostEditor extends React.Component {
-  render() {
-    return (
-      <form>
-        <input type="text" name="title" placeholder="Title" />
-        <textarea name="original_content"></textarea>
-        <button type="submit" name="submit_type" value="draft">Save Draft</button>
-        <button type="submit" name="submit_type" value="publish">Publish</button>
-      </form>
-    )
-  }
-}
+import PostEditor from '../components/PostEditor';
 
 let postEditor = document.querySelectorAll('.react-entry[data-react="PostEditor"]')[0]
 if (postEditor)
