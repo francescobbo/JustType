@@ -1,84 +1,62 @@
 import React from 'react';
-import SimpleMDE from 'react-simplemde-editor';
+import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
+
+import ArticleEditorForm from './ArticleEditorForm';
+
+import { fetchArticle } from '../actions'
 
 export default class ArticleEditor extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      title: '',
-      content: ''
-    }
+    this.store = createStore((state = { article: { title: '', content: '' } }, action) => {
+      switch (action.type) {
+        case 'SET_TITLE':
+          return {
+            ...state,
+            article: {
+              ...state.article,
+              title: action.payload.title
+            }
+          }
+          break
+        case 'SET_CONTENT':
+          return {
+            ...state,
+            article: {
+              ...state.article,
+              content: action.payload.content
+            }
+          }
+          break
+        case 'RECEIVE_ARTICLE':
+          return {
+            ...state,
+            article: {
+              id: action.payload.id,
+              title: action.payload.title,
+              content: action.payload.original_content
+            }
+          }
+        default:
+          return state
+      }
+    }, applyMiddleware(thunkMiddleware))
+  }
 
+  componentDidMount() {
     if (this.props.id) {
-      fetch('/admin/articles/' + this.props.id, {
-        credentials: 'same-origin',
-        headers: new Headers({
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        })
-      }).then(response => response.json()).then((response) => {
-        this.titleInput.value = response.title
-        this.contentInput.value = response.original_content
-
-        this.setState(content: response.original_content)
-      })
-    }
-  }
-
-  changeTitle = (event) => {
-    this.setState({ title: event.target.value })
-  }
-
-  changeContent = (value) => {
-    this.setState({ content: value })
-  }
-
-  saveDraft = () => {
-    fetch('/admin/articles', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: new Headers({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        article: this.requestBody(),
-        submit_type: 'draft'
-      })
-    })
-  }
-
-  publish = () => {
-    fetch('/admin/articles', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: new Headers({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        article: this.requestBody(),
-        submit_type: 'publish'
-      })
-    })
-  }
-
-  requestBody() {
-    return {
-      title: this.state.title,
-      original_content: this.state.content
+      this.store.dispatch(fetchArticle(this.props.id))
     }
   }
 
   render() {
     return (
-      <div>
-        <input ref={(input) => { this.titleInput = input }} type="text" placeholder="Title" onChange={this.changeTitle} />
-        <SimpleMDE ref={(input) => { this.contentInput = input }} onChange={this.changeContent} />
-        <button onClick={this.saveDraft}>Save Draft</button>
-        <button onClick={this.publish}>Publish</button>
-      </div>
+      <Provider store={this.store}>
+        <ArticleEditorForm />
+      </Provider>
     )
   }
 }

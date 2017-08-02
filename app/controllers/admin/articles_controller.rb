@@ -33,7 +33,7 @@ module Admin
       if article.save
         respond_to do |format|
           format.html { redirect_to admin_root_path }
-          format.json { head :created }
+          format.json { render :show, locals: { article: article }, status: :created }
         end
       else
         respond_to do |format|
@@ -56,10 +56,10 @@ module Admin
 
       article.publish if article.published_at || params['submit_type'] == 'publish'
 
-      if article.save
+      if article.update(article_params)
         respond_to do |format|
           format.html { redirect_to admin_root_path }
-          format.json { head :created }
+          format.json { render :show, locals: { article: article }, status: :created }
         end
       else
         respond_to do |format|
