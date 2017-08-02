@@ -8,7 +8,7 @@ describe 'Articles API' do
       tags 'Articles'
       consumes 'application/json'
       produces 'application/json'
-      security [ basic: [] ]
+      security [basic: []]
 
       response '200', 'Success' do
         schema type: :array,
@@ -20,7 +20,7 @@ describe 'Articles API' do
                    original_content: { type: :string },
                    rendered_content: { type: :string }
                  },
-                 required: [ 'id', 'title', 'original_content', 'rendered_content' ]
+                 required: %w[id title original_content rendered_content]
                }
 
         let(:Authorization) { "Basic #{::Base64.strict_encode64('j@snow.com:s3cr3t')}" }
@@ -46,7 +46,7 @@ describe 'Articles API' do
       tags 'Articles'
       consumes 'application/json'
       produces 'application/json'
-      security [ basic: [] ]
+      security [basic: []]
 
       parameter name: :article,
                 in: :body,
@@ -56,7 +56,7 @@ describe 'Articles API' do
                     title: { type: :string },
                     original_content: { type: :string }
                   },
-                  required: [ 'title', 'content' ]
+                  required: %w[title content]
                 }
 
       response '201', 'Article created' do
@@ -91,7 +91,7 @@ describe 'Articles API' do
     get 'Retrieves an article' do
       tags 'Articles'
       produces 'application/json'
-      security [ basic: [] ]
+      security [basic: []]
 
       parameter name: :id, in: :path, type: :string
 
@@ -103,7 +103,7 @@ describe 'Articles API' do
                  original_content: { type: :string },
                  rendered_content: { type: :string }
                },
-               required: [ 'id', 'title', 'original_content', 'rendered_content' ]
+               required: %w[id title original_content rendered_content]
 
         let(:Authorization) { "Basic #{::Base64.strict_encode64('j@snow.com:s3cr3t')}" }
         let(:id) { FactoryGirl.create(:article).id }
