@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SimpleMDE from 'react-simplemde-editor';
 
 import ArticleEditor from '../components/ArticleEditor';
 
 let articleEditor = document.querySelectorAll('.react-entry[data-react="ArticleEditor"]')[0]
-if (articleEditor)
-  ReactDOM.render(<ArticleEditor />, articleEditor);
+if (articleEditor) {
+  let params = articleEditor.dataset.params != undefined ? JSON.parse(articleEditor.dataset.params) : {}
+  ReactDOM.render(<ArticleEditor {...params} />, articleEditor);
+}

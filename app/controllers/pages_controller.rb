@@ -4,7 +4,7 @@ class PagesController < ApplicationController
     set_meta_tags(canonical: root_url)
 
     render locals: {
-      article: Article.visible.all
+      articles: Article.visible.all
     }
   end
 end

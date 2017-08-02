@@ -43,6 +43,32 @@ module Admin
       end
     end
 
+    def edit
+      article = Article.find(params[:id])
+
+      render locals: {
+        article: article
+      }
+    end
+
+    def update
+      article = Article.find(params[:id])
+
+      article.publish if article.published_at || params['submit_type'] == 'publish'
+
+      if article.save
+        respond_to do |format|
+          format.html { redirect_to admin_root_path }
+          format.json { head :created }
+        end
+      else
+        respond_to do |format|
+          format.html { render :new, locals: { article: article } }
+          format.json { head :unprocessable_entity }
+        end
+      end
+    end
+
     private
 
     def article_params
