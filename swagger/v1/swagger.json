@@ -1,0 +1,189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/admin/articles": {
+      "get": {
+        "summary": "Lists all articles",
+        "tags": [
+          "Articles"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "basic": [
+
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "uuid"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "original_content": {
+                    "type": "string"
+                  },
+                  "rendered_content": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "title",
+                  "original_content",
+                  "rendered_content"
+                ]
+              }
+            }
+          },
+          "403": {
+            "description": "Authentication failed"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates an article",
+        "tags": [
+          "Articles"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "basic": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "article",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "original_content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title",
+                "content"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Article created"
+          },
+          "422": {
+            "description": "Invalid parameters"
+          },
+          "403": {
+            "description": "Authentication failed"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/articles/{id}": {
+      "get": {
+        "summary": "Retrieves an article",
+        "tags": [
+          "Articles"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "basic": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "uuid"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "original_content": {
+                  "type": "string"
+                },
+                "rendered_content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "original_content",
+                "rendered_content"
+              ]
+            }
+          },
+          "404": {
+            "description": "Article not found"
+          },
+          "403": {
+            "description": "Authentication failed"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "basic"
+    }
+  }
+}

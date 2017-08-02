@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  unless Rails.env.production?
+    mount Rswag::Ui::Engine => '/api-docs'
+    mount Rswag::Api::Engine => '/api-docs'
+  end
+
   namespace :admin do
     root to: 'admin#dashboard'
 

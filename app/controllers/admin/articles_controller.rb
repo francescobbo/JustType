@@ -1,5 +1,12 @@
 module Admin
   class ArticlesController < AdminController
+    def index
+      articles = Article.all
+      render locals: {
+        articles: articles
+      }
+    end
+
     def new
       render locals: {
         article: Article.new
@@ -8,6 +15,12 @@ module Admin
 
     def show
       article = Article.find(params[:id])
+
+      render locals: {
+        article: article
+      }
+    rescue ActiveRecord::RecordNotFound
+      request.format.json? ? head(:not_found) : raise
     end
 
     def create
@@ -18,11 +31,15 @@ module Admin
       article.publish if article.published_at || params['submit_type'] == 'publish'
 
       if article.save
-        redirect_to admin_root_path
+        respond_to do |format|
+          format.html { redirect_to admin_root_path }
+          format.json { head :created }
+        end
       else
-        render :new, locals: {
-          article: article
-        }
+        respond_to do |format|
+          format.html { render :new, locals: { article: article } }
+          format.json { head :unprocessable_entity }
+        end
       end
     end
 
