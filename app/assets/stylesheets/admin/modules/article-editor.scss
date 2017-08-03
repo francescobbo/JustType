@@ -1,0 +1,11 @@
+.article-editor {
+  &--title {
+    font-size: 1.2em;
+    padding: .333em;
+    margin-bottom: .5em;
+
+    @media (min-width: 600px) {
+      font-size: 2em;
+    }
+  }
+}

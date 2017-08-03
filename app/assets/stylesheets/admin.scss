@@ -1,2 +1,16 @@
 @import 'admin/normalize';
+@import 'admin/layout';
+@import 'admin/forms';
 @import 'admin/modules/*';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+                Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+                "Segoe UI Symbol";
+}
