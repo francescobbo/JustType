@@ -1,8 +1,12 @@
-input[type=text] {
+input[type=text], textarea {
   border: 1px solid #ccc;
   border-radius: 2px;
   width: 100%;
   outline: none;
+  padding: .5rem;
+  line-height: 1.618;
+  resize: vertical;
+  margin-bottom: 1rem;
 }
 
 label {

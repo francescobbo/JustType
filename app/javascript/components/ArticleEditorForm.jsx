@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import SimpleMDE from 'react-simplemde-editor'
 import ExtensionPoint from './ExtensionPoint'
 
-import { setTitle, setContent, saveDraft, publish } from '../actions'
+import { setTitle, setContent, setMetaDescription, saveDraft, publish } from '../actions'
 
 class ArticleEditorForm extends React.Component {
   constructor() {
@@ -21,6 +21,11 @@ class ArticleEditorForm extends React.Component {
                type="text"
                placeholder={this.state.titlePlaceholder}
                onChange={this.props.updateTitle} />
+         <label htmlFor="metaDescription">Meta description</label>
+         <textarea name="metaDescription"
+                   type="text"
+                   placeholder="Search Engines use it as preview in result pages. Best ones are under 160 characters and use Call to Actions. Search Engines will generate the preview if blank."
+                   onChange={this.props.updateMetaDescription}>{this.props.article.meta_description}</textarea>
         <SimpleMDE value={this.props.article.original_content} onChange={this.props.updateContent} />
         <button onClick={this.props.onSaveDraft}>Save Draft</button>
         <button onClick={this.props.onPublish}>Publish</button>
@@ -80,6 +85,9 @@ export default connect(
       },
       updateContent: (value) => {
         dispatch(setContent(value))
+      },
+      updateMetaDescription: (value) => {
+        dispatch(setMetaDescription(value))
       },
       onSaveDraft: () => {
         dispatch(saveDraft())

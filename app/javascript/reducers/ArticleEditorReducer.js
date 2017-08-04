@@ -10,6 +10,11 @@ export default (state = { title: '', original_content: '' }, action) => {
       ...state,
       original_content: action.payload.content
     }
+  case 'SET_META_DESCRIPTION':
+    return {
+      ...state,
+      meta_description: action.payload.meta_description
+    }
   case 'RECEIVE_ARTICLE':
     return action.payload
   default:

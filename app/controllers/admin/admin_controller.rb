@@ -34,7 +34,7 @@ module Admin
     def ensure_admin
       unless current_user.admin?
         respond_to do |format|
-          format.html { redirect_to admin_signin_path }
+          format.html { redirect_to root_path }
           format.json { head :unauthorized }
         end
       end

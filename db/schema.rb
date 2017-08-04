@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170801092558) do
     t.text "slug", null: false
     t.text "original_content"
     t.text "rendered_content", null: false
+    t.text "meta_description"
     t.boolean "published", default: false, null: false
     t.datetime "published_at"
     t.datetime "created_at", null: false

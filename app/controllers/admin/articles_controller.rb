@@ -72,7 +72,7 @@ module Admin
     private
 
     def article_params
-      params.require(:article).permit(:title, :original_content, :published_at)
+      params.require(:article).permit(:title, :meta_description, :original_content, :published_at)
     end
   end
 end

@@ -58,3 +58,12 @@ export const setContent = (content) => {
     }
   }
 }
+
+export const setMetaDescription = (meta_description) => {
+  return {
+    type: 'SET_META_DESCRIPTION',
+    payload: {
+      meta_description: meta_description
+    }
+  }
+}
