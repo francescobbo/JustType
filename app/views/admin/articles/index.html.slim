@@ -1,0 +1,19 @@
+h1 All Articles
+
+= link_to 'Write a New Article', new_admin_article_path, class: 'button button--positive-action'
+
+table
+  thead
+    tr
+      th Title
+      th Author
+      th Category
+      th Published at
+
+  tbody
+    - articles.each do |article|
+      tr
+        td = link_to article.title, edit_admin_article_path(article.id)
+        td = article.author.name
+        td = article.category&.name || '-'
+        td = article.published_at ? l(article.published_at, format: :long) : 'Draft'

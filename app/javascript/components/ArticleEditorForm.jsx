@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SimpleMDE from 'react-simplemde-editor'
+import ExtensionPoint from './ExtensionPoint'
 
 import { setTitle, setContent, saveDraft, publish } from '../actions'
 
@@ -23,6 +24,7 @@ class ArticleEditorForm extends React.Component {
         <SimpleMDE value={this.props.article.original_content} onChange={this.props.updateContent} />
         <button onClick={this.props.onSaveDraft}>Save Draft</button>
         <button onClick={this.props.onPublish}>Publish</button>
+        <ExtensionPoint name="ArticleEditorBottom" />
       </div>
     )
   }

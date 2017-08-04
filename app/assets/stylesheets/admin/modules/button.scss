@@ -1,0 +1,21 @@
+.button {
+  padding: 0 1em;
+  line-height: 3;
+  border: 0;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 1em;
+
+  &--positive-action {
+    background: #03A9F4;
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  transition: all .1s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 3px 3px rgba(black, .3);
+  }
+}
