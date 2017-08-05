@@ -1,4 +1,4 @@
-export default (state = { title: '', original_content: '' }, action) => {
+export default (state = { title: '', meta_description: '', original_content: '' }, action) => {
   switch (action.type) {
   case 'SET_TITLE':
     return {

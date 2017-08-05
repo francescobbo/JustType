@@ -86,8 +86,8 @@ export default connect(
       updateContent: (value) => {
         dispatch(setContent(value))
       },
-      updateMetaDescription: (value) => {
-        dispatch(setMetaDescription(value))
+      updateMetaDescription: (e) => {
+        dispatch(setMetaDescription(e.target.value))
       },
       onSaveDraft: () => {
         dispatch(saveDraft())
